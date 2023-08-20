@@ -1,0 +1,13 @@
+.root {
+  input {
+    color: aliceblue;
+  }
+  s input:focus {
+    outline: 3px solid orange;
+  }
+  Button:hover {
+    background-color: transparent;
+    border: 1px solid #1a76d2;
+    border-radius: 4px;
+  }
+}
