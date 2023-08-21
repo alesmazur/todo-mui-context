@@ -8,9 +8,9 @@ export default function TodoList() {
 
   return (
     <ul className="todo-list">
-      <Stack spacing={2} direction="column-reverse">
+      <Stack spacing={2} direction="column">
         {todos.map((obj, index) => (
-          <Todo  index={index} key={obj.id} {...obj} />
+          <Todo index={index} key={obj.id} {...obj} />
         ))}
       </Stack>
     </ul>
