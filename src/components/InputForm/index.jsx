@@ -1,6 +1,7 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { v4 as uuidv4 } from "uuid";
 import TextField from "@mui/material/TextField";
 import { AppContext } from "../../context/AppContext";
 import styles from "./InputForm.module.scss";
@@ -10,8 +11,14 @@ export default function InputForm() {
     React.useContext(AppContext);
 
   const onClickAddHandler = (text) => {
+    const newTodo = {
+      text,
+      isCompleted: false,
+      id: uuidv4(),
+    };
+    console.log(newTodo);
     if (text) {
-      setTodos([...todos, text]);
+      setTodos([...todos, newTodo]);
       setInputText("");
     }
   };

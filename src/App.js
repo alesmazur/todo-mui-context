@@ -10,10 +10,11 @@ import { AppContext } from "./context/AppContext";
 function App() {
   const [todos, setTodos] = React.useState([]);
   const [inputText, setInputText] = React.useState("");
+
   const deleteTodoHandler = (index) => {
     setTodos(
-      todos.filter((item, id) => {
-        return id !== index;
+      todos.filter((obj) => {
+        return obj.id !== index;
       })
     );
   };
