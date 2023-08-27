@@ -10,6 +10,8 @@ import { AppContext } from "./context/AppContext";
 function App() {
   const [todos, setTodos] = React.useState([]);
   const [inputText, setInputText] = React.useState("");
+  const completedTodosCount = todos.filter((todo) => todo.isCompleted).length;
+  console.log(completedTodosCount);
 
   const deleteTodoHandler = (index) => {
     setTodos(
@@ -19,10 +21,33 @@ function App() {
     );
   };
 
+  const clearAllHandler = () => {
+    if (window.confirm("Delete all todos?")) {
+      setTodos([]);
+    }
+  };
+
+  const checkBoxHandler = (index) => {
+    setTodos(
+      todos.map((obj) => {
+        return obj.id === index
+          ? { ...obj, isCompleted: !obj.isCompleted }
+          : { ...obj };
+      })
+    );
+  };
+
   return (
     <>
       <AppContext.Provider
-        value={{ todos, setTodos, inputText, setInputText, deleteTodoHandler }}
+        value={{
+          todos,
+          setTodos,
+          inputText,
+          setInputText,
+          deleteTodoHandler,
+          checkBoxHandler,
+        }}
       >
         <div className="App">
           <header className="App-header">
@@ -34,15 +59,49 @@ function App() {
             </Stack>
           </main>
           <footer className="App-footer">
-            {todos.length ? (
-              <Button
-                startIcon={<DeleteIcon />}
-                variant="outlined"
-                onClick={() => setTodos([])}
-              >
-                Clear All
-              </Button>
-            ) : null}
+            <div
+              id="buttons"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {todos.length ? (
+                <Button
+                  startIcon={<DeleteIcon />}
+                  variant="outlined"
+                  onClick={clearAllHandler}
+                >
+                  Clear All
+                </Button>
+              ) : null}
+              {todos.filter((item) => item.isCompleted).length ? (
+                <Button
+                  style={{ marginLeft: "5px" }}
+                  variant="outlined"
+                  onClick={() =>
+                    setTodos(todos.filter((item) => !item.isCompleted))
+                  }
+                >
+                  Clear done{" "}
+                  <span
+                    style={{
+                      backgroundColor: "transparent",
+                      marginLeft: "5px",
+                      border: "1px solid green",
+                      borderRadius: "100%",
+                      width: "25px",
+                      height: "25px",
+                      textAlign: "center",
+                      color: "white",
+                    }}
+                  >
+                    {completedTodosCount}
+                  </span>
+                </Button>
+              ) : null}
+            </div>
 
             <div
               style={{
