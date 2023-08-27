@@ -37,12 +37,16 @@ function App() {
   };
 
   const editHandler = (index) => {
-    const newText = prompt("Edit todo");
-    setTodos(
-      todos.map((obj) =>
-        obj.id === index ? { ...obj, text: newText } : { ...obj }
-      )
+    const newText = prompt(
+      "Edit todo",
+      `${todos.filter((todo) => todo.id === index)[0].text}`
     );
+    newText &&
+      setTodos(
+        todos.map((obj) =>
+          obj.id === index ? { ...obj, text: newText } : { ...obj }
+        )
+      );
   };
 
   return (
