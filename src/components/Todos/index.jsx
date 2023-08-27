@@ -6,8 +6,8 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import EditIcon from "@mui/icons-material/Edit";
 import { AppContext } from "../../context/AppContext";
 
-export default function Todos({ text, id,  index }) {
-  const { deleteTodoHandler,  checkBoxHandler } =
+export default function Todos({ text, id, index }) {
+  const { deleteTodoHandler, checkBoxHandler, editHandler } =
     React.useContext(AppContext);
   const [done, setDone] = React.useState(false);
   const checkBoxToggle = (i) => {
@@ -35,7 +35,7 @@ export default function Todos({ text, id,  index }) {
         ) : (
           <EditIcon
             onClick={() => {
-              onEditHandler(id);
+              editHandler(id);
             }}
           />
         )}

@@ -11,7 +11,6 @@ function App() {
   const [todos, setTodos] = React.useState([]);
   const [inputText, setInputText] = React.useState("");
   const completedTodosCount = todos.filter((todo) => todo.isCompleted).length;
-  console.log(completedTodosCount);
 
   const deleteTodoHandler = (index) => {
     setTodos(
@@ -37,6 +36,15 @@ function App() {
     );
   };
 
+  const editHandler = (index) => {
+    const newText = prompt("Edit todo");
+    setTodos(
+      todos.map((obj) =>
+        obj.id === index ? { ...obj, text: newText } : { ...obj }
+      )
+    );
+  };
+
   return (
     <>
       <AppContext.Provider
@@ -47,6 +55,7 @@ function App() {
           setInputText,
           deleteTodoHandler,
           checkBoxHandler,
+          editHandler,
         }}
       >
         <div className="App">

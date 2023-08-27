@@ -16,7 +16,7 @@ export default function InputForm() {
       isCompleted: false,
       id: uuidv4(),
     };
-    console.log(newTodo);
+
     if (text) {
       setTodos([...todos, newTodo]);
       setInputText("");
