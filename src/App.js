@@ -6,9 +6,15 @@ import "./App.scss";
 import InputForm from "./components/InputForm";
 import TodoList from "./components/TodoList";
 import { AppContext } from "./context/AppContext";
+import { db } from "./firebase";
 
 function App() {
-  const [todos, setTodos] = React.useState([]);
+  const [todos, setTodos] = React.useState(() => {
+    const localData = localStorage.getItem("todos");
+    return localData ? JSON.parse(localData) : [];
+  });
+
+  console.log(todos);
   const [inputText, setInputText] = React.useState("");
   const completedTodosCount = todos.filter((todo) => todo.isCompleted).length;
 
@@ -48,6 +54,10 @@ function App() {
         )
       );
   };
+  // local storage
+  React.useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <>
