@@ -10,7 +10,7 @@ export default function TodoList() {
     <ul className="todo-list">
       <Stack spacing={2} direction="column">
         {todos.map((obj, index) => (
-          <Todo index={index} key={obj.id} {...obj} />
+          <Todo checked={obj.isCompleted} index={index} key={obj.id} {...obj} />
         ))}
       </Stack>
     </ul>

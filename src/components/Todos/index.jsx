@@ -6,14 +6,16 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import EditIcon from "@mui/icons-material/Edit";
 import { AppContext } from "../../context/AppContext";
 
-export default function Todos({ text, id, index }) {
+export default function Todos({ text, id, index, checked }) {
   const { deleteTodoHandler, checkBoxHandler, editHandler } =
     React.useContext(AppContext);
   const [done, setDone] = React.useState(false);
   const checkBoxToggle = (i) => {
     setDone(!done);
     checkBoxHandler(i);
+    return done;
   };
+  console.log(done);
   const deleteTodo = (i) => {
     deleteTodoHandler(i);
   };
@@ -26,7 +28,7 @@ export default function Todos({ text, id, index }) {
           <div>{text}</div>
         </div>
 
-        {done ? (
+        {checked ? (
           <ClearIcon
             style={{ cursor: "pointer" }}
             onClick={() => deleteTodo(id)}
@@ -47,6 +49,7 @@ export default function Todos({ text, id, index }) {
           size="medium"
           checkedIcon={<TaskAltIcon />}
           icon={<CheckIcon />}
+          checked={checked}
         />
       </div>
     </div>

@@ -14,7 +14,6 @@ function App() {
     return localData ? JSON.parse(localData) : [];
   });
 
-  console.log(todos);
   const [inputText, setInputText] = React.useState("");
   const completedTodosCount = todos.filter((todo) => todo.isCompleted).length;
 
@@ -57,7 +56,7 @@ function App() {
   // local storage
   React.useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  }, [todos, completedTodosCount]);
 
   return (
     <>
