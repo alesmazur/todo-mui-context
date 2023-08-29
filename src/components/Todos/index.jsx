@@ -22,7 +22,7 @@ export default function Todos({ text, id, index, checked }) {
 
   return (
     <div className="todo-item">
-      <div className={done ? "todo done" : "todo "}>
+      <div className={checked ? "todo done" : "todo "}>
         <div className="todo-text">
           <div>{index + 1}.</div>
           <div>{text}</div>
